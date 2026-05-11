@@ -1,0 +1,38 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: Update apt cache
+    tags: always
+    apt: 
+      update_cache: yes
+    changed_when: false  
+
+  - name: Install security updates only
+    apt:
+      upgrade: safe
+      security: yes  # tylko pakiety bezpieczeństwa
+    throttle: 1  # 1 host naraz    
+
+  - name: create simone user
+    tags: always
+    user:
+      name: simone
+      groups: root
+
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJHIiJHSnswY2gnDAzcaZq6pHPoep8v31Q3qwvU+dm41 ansible"        
+
+  - name: add sudoers file for simone
+    tags: always 
+    copy:
+      src: sudoer_simone
+      dest: /etc/sudoers.d/simone
+      owner: root
+      group: root     
+      mode: 0440
