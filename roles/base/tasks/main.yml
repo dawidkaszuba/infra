@@ -1,6 +1,6 @@
-- name: install vim 
+- name: install vim and neofetch 
   apt:
     name: 
     - vim
-    - neowofetch
+    - "{{ neofetch_name }}"
     state: latest 

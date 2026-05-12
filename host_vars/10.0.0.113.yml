@@ -1,0 +1,4 @@
+ansible_python_interpreter: /usr/bin/python3
+neofetch_name: neowofetch
+ssh_users: "dawid simone"
+ssh_template_file: sshd_config_debian.j2
