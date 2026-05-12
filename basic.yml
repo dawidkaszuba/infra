@@ -1,13 +1,5 @@
 ---
-
 - hosts: all
   become: true
-
-  tasks:
-
-  - name: install vim 
-    apt:
-      name: 
-      - vim
-      - neowofetch
-      state: latest
+  roles:
+    - base
